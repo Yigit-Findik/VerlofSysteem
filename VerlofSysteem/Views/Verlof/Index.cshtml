@@ -1,11 +1,6 @@
-﻿@{
-    var verloven = ViewData["verloven"] as List<VerlofSysteem.Models.Verlof>;
-}
+﻿@model VerlofSysteem.ViewModel.VerlofViewModel
 
-
-<h1 class="text-3xl font-bold">
-    Verlof
-</h1>
+<h1>@Model.titel</h1>
 
 <table class="table">
     <tr>
@@ -15,14 +10,11 @@
         <th>Start Datum</th>
         <th>Eind Datum</th>
     </tr>
-    @foreach (var verlof in verloven)
-    {
-        <tr>
-            <td>@verlof.Id</td>
-            <td>@verlof.Gebruiker</td>
-            <td>@verlof.AanvraagDatum</td>
-            <td>@verlof.StartDatum</td>
-            <td>@verlof.EindDatum</td>
-        </tr>
-    }
+    <tr>
+        <td>@Model.verlof.Id</td>
+        <td>@Model.verlof.Gebruiker</td>
+        <td>@Model.verlof.AanvraagDatum</td>
+        <td>@Model.verlof.StartDatum</td>
+        <td>@Model.verlof.EindDatum</td>
+    </tr>
 </table>

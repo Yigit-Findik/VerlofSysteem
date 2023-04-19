@@ -1,21 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VerlofSysteem.Models;
+using VerlofSysteem.ViewModel;
 
 namespace VerlofSysteem.Controllers
 {
     public class VerlofController : Controller
     {
+        [ViewData]
+        public string titel { get; set; }
         public IActionResult Index()
         {
-
-            var verloven = new List<Verlof>
+            // * Note: not particularly better, but it's using model instead of ViewData
+            var newModel = new VerlofViewModel()
             {
-                new Verlof { Id = 1, Gebruiker = "Johan", AanvraagDatum = DateTime.Now, StartDatum = new DateTime(2023, 4, 19), EindDatum = new DateTime(2023, 5, 19) },
-                new Verlof { Id = 2, Gebruiker = "Jacks", AanvraagDatum = DateTime.Now, StartDatum = new DateTime(2023, 5, 19), EindDatum = new DateTime(2023, 6, 19) },
-                new Verlof { Id = 3, Gebruiker = "Gabriel", AanvraagDatum = DateTime.Now, StartDatum = new DateTime(2023, 6, 19), EindDatum = new DateTime(2023, 7, 19) }
+                verlof = new Verlof
+                {
+                    Id = 1,
+                    Gebruiker = "Jacks",
+                    AanvraagDatum = DateTime.Now,
+                    StartDatum = new DateTime(2023, 4, 19),
+                    EindDatum = new DateTime(2023, 5, 19)
+                },
+                titel = "Verlof Details"
             };
-            ViewData["verloven"] = verloven;
-            return View();
+            
+            return View(newModel);
         }
     }
 }
