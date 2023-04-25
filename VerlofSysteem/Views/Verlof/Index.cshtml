@@ -1,7 +1,8 @@
-﻿@model VerlofSysteem.ViewModel.VerlofViewModel
+﻿@model IEnumerable<VerlofSysteem.Models.Verlof>
 
-<h1>@Model.titel</h1>
-
+@{
+    ViewData["Title"] = "Title - Verlof";
+}
 <table class="table">
     <tr>
         <th>ID</th>
@@ -10,11 +11,14 @@
         <th>Start Datum</th>
         <th>Eind Datum</th>
     </tr>
-    <tr>
-        <td>@Model.verlof.Id</td>
-        <td>@Model.verlof.Gebruiker</td>
-        <td>@Model.verlof.AanvraagDatum</td>
-        <td>@Model.verlof.StartDatum</td>
-        <td>@Model.verlof.EindDatum</td>
-    </tr>
+    @foreach (var verlof in Model)
+    {
+        <tr>
+            <td>@verlof.Id</td>
+            <td>@verlof.Gebruiker</td>
+            <td>@verlof.AanvraagDatum</td>
+            <td>@verlof.StartDatum</td>
+            <td>@verlof.EindDatum</td>
+        </tr>
+    }
 </table>
