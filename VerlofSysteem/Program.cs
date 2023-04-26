@@ -1,9 +1,17 @@
 using VerlofSysteem.Repository;
+using VerlofSysteem.Context;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Register the database context as a service. Use the verlof connection string.
+var connectionString = builder.Configuration.GetConnectionString("VerlofDbConnection");
+builder.Services.AddDbContext<VerlofDbContext>(options => options.UseSqlServer
+    (connectionString));
+
 builder.Services.AddScoped<IVerlofRepository, VerlofRepository>();
 
 var app = builder.Build();

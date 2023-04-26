@@ -1,19 +1,15 @@
-﻿using VerlofSysteem.Models;
+﻿using VerlofSysteem.Context;
+using VerlofSysteem.Models;
 
 namespace VerlofSysteem.Repository;
 
 public class VerlofRepository : IVerlofRepository
 {
-    private List<Verlof> _verlofs;
+    private readonly VerlofDbContext _context;
 
-    public VerlofRepository()
+    public VerlofRepository(VerlofDbContext context)
     {
-        //Mock data
-        _verlofs = new List<Verlof>()
-        {
-            new Verlof(){ Id = 1, Gebruiker = "Jack", AanvraagDatum = DateTime.Now, StartDatum = DateTime.Now.AddDays(7), EindDatum = DateTime.Now.AddMonths(1) },
-            new Verlof(){ Id = 2, Gebruiker = "Jason", AanvraagDatum = DateTime.Now, StartDatum = DateTime.Now.AddDays(7), EindDatum = DateTime.Now.AddMonths(1) }
-        };
+        _context = context;
     }
     
     public Verlof Add(Verlof verlof)
@@ -28,7 +24,7 @@ public class VerlofRepository : IVerlofRepository
     
     public IEnumerable<Verlof> GetAllVerlof()
     {
-        return _verlofs;
+        return _context.Verlofs;
     }
     
     public Verlof GetVerlof(int Id)
